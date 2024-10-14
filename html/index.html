@@ -6,11 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store ERP</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@iconify/iconify@latest/dist/iconify.min.js"></script>
 </head>
 
 <body>
-    <script src="../js/index.js"></script>
+    <script type="module" src="../js/index.js"></script>
 
+    <h1>Bookshop ERP</h1>
+
+    <header>
+        <p>+ New Book</p>
+        <div id="load-lang">
+            <p>Load Data</p>
+            <p>English</p>
+        </div>
+    </header>
+
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title
+                        <span title="filter by title"><i class="iconify" data-icon="fe:drop-up"></i></span>
+                    </th>
+                    <th>Price
+                        <span title="sort by price"><i class="iconify" data-icon="fe:drop-up"></i></span>
+                    </th>
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- will be filled in book data on page loading by displayBookData() function -->
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

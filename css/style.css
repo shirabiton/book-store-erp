@@ -1,0 +1,89 @@
+:root {
+    --th-bg: #DADADA;
+    --button-primary-bg: #6964D8;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 4vw;
+    background-color: #F5F5F5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana;
+}
+
+h1 {
+    font-family: cursive;
+    color: #565656;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+    padding: 0 1vw;
+    color: white;
+    background-color: #353A40;
+    font-weight: 500;
+    margin: 0 auto;
+}
+
+#load-lang {
+    display: flex;
+    gap: 2vw;
+}
+
+#table-container {
+    background-color: #EEECFA;
+    min-width: 70%;
+    min-height: 42vh;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: white;
+    min-width: 97%;
+    margin: 0 auto;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 5px;
+    font-weight: 500;
+}
+
+th {
+    border: 1px solid #F5F5F5;
+    border-top: none;
+    background-color: var(--th-bg);
+}
+
+td {
+    border: 1px solid var(--th-bg);
+}
+
+.action-btn {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.action-btn:hover {
+    background-color: #f0f0f0;
+}
+
+#delete-icn {
+    display: flex;
+    justify-content: center;
+}
+
+#delete-icn:hover {
+    color: rgba(203, 5, 5, 0.882);
+}
+
+.iconify {
+    cursor: pointer;
+}
