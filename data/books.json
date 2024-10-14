@@ -1,0 +1,34 @@
+{
+    "books": [
+        {
+            "id": 0,
+            "title": "The Hobbit",
+            "price": 34.00,
+            "action": "Read"
+        },
+        {
+            "id": 1,
+            "title": "The Hitchhikers Guide to the Galaxy",
+            "price": 13.95,
+            "action": "Read"
+        },
+        {
+            "id": 2,
+            "title": "The Lord Of The Rings",
+            "price": 32.55,
+            "action": "Read"
+        },
+        {
+            "id": 3,
+            "title": "The Catcher in the Rye",
+            "price": 4.55,
+            "action": "Read"
+        },
+        {
+            "id": 4,
+            "title": "Effective Modern C++",
+            "price": 34.00,
+            "action": "Read"
+        }
+    ]
+}
