@@ -103,7 +103,8 @@ td {
   color: rgba(203, 5, 5, 0.882);
 }
 
-.iconify {
+.iconify,
+button {
   cursor: pointer;
 }
 
@@ -150,6 +151,29 @@ td {
 #book-price,
 label {
   font-weight: 600;
+}
+
+#rate {
+  background-color: #efeeee;
+  border: none;
+  margin: 0;
+  text-align: center;
+  padding: 3px 18px;
+}
+
+#dec,
+#inc {
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: none;
+  margin: 0;
+  padding: 3px 22px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .overlay {
@@ -211,29 +235,6 @@ form input:not([type="submit"]) {
   display: flex;
   justify-content: space-between;
   margin-top: 1vh;
-}
-
-#rate {
-  background-color: #efeeee;
-  border: none;
-  margin: 0;
-  text-align: center;
-  padding: 3px 18px;
-}
-
-#dec,
-#inc {
-  background-color: var(--button-primary-bg);
-  color: white;
-  border: none;
-  margin: 0;
-  padding: 3px 22px;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 @media screen and (max-width: 1000px) {

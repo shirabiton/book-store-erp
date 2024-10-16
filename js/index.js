@@ -1,50 +1,26 @@
-// data was inserted first to local storage:
+// These lines must be executed during the first run to store the data into localStorage.
+// Make sure to run the project using a local server (e.g., Live Server) to avoid CORS issues.
 
-// import bookData from '../data/books.json' with {type: 'json'};
+// import bookData from '/../data/books.json' with {type: 'json'};
 // localStorage.setItem("bookData", JSON.stringify(bookData.books));
 
 let originalBooks = JSON.parse(localStorage.getItem("bookData"));
 let books = [...originalBooks];
 let isUpdateBookEvent = false;
 
+// Some HTML elements
+let addBookOverlay = document.querySelector("#add-overlay");
+let updateBookOverlay = document.querySelector("#update-overlay");
+let addBookForm = document.querySelector("#add-book-form");
+let updateBookForm = document.querySelector("#update-book-form");
+
 function displayBookData() {
-  // add event listeners in some elements
-  document.querySelector("#title-th").addEventListener("click", sortByTitle);
-  document.querySelector("#price-th").addEventListener("click", sortByPrice);
-  document.querySelector("#load-data").addEventListener("click", loadData);
-  document
-    .querySelector("#add-book-btn")
-    .addEventListener("click", openAddBookOverlay);
-  document
-    .querySelector("#add-book-form")
-    .addEventListener("submit", (event) => {
-      // event.preventDefault();
-      addBook();
-    });
-  document
-    .querySelector("#add-book-form")
-    .querySelector("button")
-    .addEventListener("click", (event) => {
-      event.preventDefault();
-      document.querySelector("#add-overlay").style.display = "none";
-    });
-
-  document
-    .querySelector("#update-book-form")
-    .querySelector("button")
-    .addEventListener("click", (event) => {
-      event.preventDefault();
-      document.querySelector("#update-overlay").style.display = "none";
-    });
-  document.querySelector("#dec").addEventListener("click", decrement);
-  document.querySelector("#inc").addEventListener("click", increment);
-
   let row, cell, readBtn, updateBtn, deleteIcn;
   let tbody = document.querySelector("tbody");
-  // clean last tbody
+  // Clean the last tbody
   tbody.innerHTML = "";
 
-  // fill table with book data
+  // Fill the table with book data
   for (let i = 0; i < books.length; i++) {
     row = document.createElement("tr");
     cell = document.createElement("td");
@@ -92,12 +68,39 @@ function displayBookData() {
   }
 }
 
+function addEventListeners() {
+  // Add listeners to events on some elements
+  document.querySelector("#title-th").addEventListener("click", sortByTitle);
+  document.querySelector("#price-th").addEventListener("click", sortByPrice);
+  document.querySelector("#load-data").addEventListener("click", loadData);
+  document
+    .querySelector("#add-book-btn")
+    .addEventListener("click", openAddBookOverlay);
+  addBookForm.addEventListener("submit", (event) => {
+    // event.preventDefault();
+    addBook();
+  });
+  addBookForm.querySelector("button").addEventListener("click", (event) => {
+    event.preventDefault();
+    addBookOverlay.style.display = "none";
+  });
+
+  updateBookForm.querySelector("button").addEventListener("click", (event) => {
+    event.preventDefault();
+    updateBookOverlay.style.display = "none";
+  });
+  document.querySelector("#dec").addEventListener("click", decrement);
+  document.querySelector("#inc").addEventListener("click", increment);
+}
+
 function showBookDetails(book) {
   let bookDetailsContainer = document.querySelector("#book-details");
 
+  // Remove the book selection command and display the details of the selected book
   bookDetailsContainer.querySelector("#inner-book-details").style.display =
     "block";
-  bookDetailsContainer.querySelector("#select-book").style.display = "none";
+  bookDetailsContainer.querySelector("#select-book-command").style.display =
+    "none";
 
   let bookTitle = bookDetailsContainer.querySelector("#book-title-container p");
   bookTitle.innerHTML = book.title;
@@ -113,30 +116,28 @@ function showBookDetails(book) {
 
   let rate = bookDetailsContainer.querySelector("#rate");
   rate.value = book.rate;
+  // Save the book ID as an attribute
   rate.setAttribute("data-book-id", book.id);
-  // rate.addEventListener("change", () => rateBook(book));
 }
 
 function openAddBookOverlay() {
-  let addBookOverlay = document.querySelector("#add-overlay");
   addBookOverlay.style.display = "flex";
   addBookOverlay.style.flexDirection = "column";
   addBookOverlay.style.alignItems = "center";
 }
 
 function openUpdateBookOverlay(book) {
-  let updateBookOverlay = document.querySelector("#update-overlay");
   updateBookOverlay.style.display = "flex";
   updateBookOverlay.style.flexDirection = "column";
   updateBookOverlay.style.alignItems = "center";
 
-  let updateBookForm = document.querySelector("#update-book-form");
-
+  // Assign the last values ​​of the book in the input fields
   updateBookForm.querySelector("#update-book-id").value = book.id;
   updateBookForm.querySelector("#update-book-title").value = book.title;
   updateBookForm.querySelector("#update-book-price").value = book.price;
   updateBookForm.querySelector("#update-book-image").value = book.image;
 
+  // If an event listener for the book update form has not been added yet-add an event listener to handle the form submission
   if (!isUpdateBookEvent) {
     updateBookForm.addEventListener("submit", (event) => {
       // event.preventDefault();
@@ -147,8 +148,6 @@ function openUpdateBookOverlay(book) {
 }
 
 function addBook() {
-  let addBookForm = document.querySelector("#add-book-form");
-
   let id = parseInt(addBookForm.querySelector("#add-book-id").value);
   let title = addBookForm.querySelector("#add-book-title").value;
   let price = Number(addBookForm.querySelector("#add-book-price").value);
@@ -167,13 +166,14 @@ function addBook() {
   localStorage.setItem("bookData", JSON.stringify(prevBooks));
   document.querySelector("#add-overlay").style.display = "none";
 
-  addBookForm.reset(); // clean form
+  // Clean form
+  addBookForm.reset();
 }
 
 function updateBook(book) {
-  let updateBookForm = document.querySelector("#update-book-form");
   let prevBooks = JSON.parse(localStorage.getItem("bookData")) || [];
   let index = prevBooks.findIndex((item) => item.id === book.id);
+
   let title = updateBookForm.querySelector("#update-book-title").value;
   let price = Number(updateBookForm.querySelector("#update-book-price").value);
   let image = updateBookForm.querySelector("#update-book-image").value;
@@ -187,11 +187,10 @@ function updateBook(book) {
   };
 
   localStorage.setItem("bookData", JSON.stringify(prevBooks));
-  document.querySelector("#update-overlay").style.display = "none";
+  updateBookOverlay.style.display = "none";
 }
 
 function deleteBook(book) {
-  console.log(book);
   let prevBooks = JSON.parse(localStorage.getItem("bookData"));
   let newBooks = prevBooks.filter((item) => item.id !== book.id);
   localStorage.setItem("bookData", JSON.stringify(newBooks));
@@ -202,6 +201,8 @@ function increment() {
   let rateInput = document.querySelector("#rate");
   if (parseInt(rateInput.value) < 5)
     rateInput.value = parseInt(rateInput.value) + 1;
+
+  // Update rate field in the current book
   let bookId = rateInput.dataset.bookId;
   let prevBooks = JSON.parse(localStorage.getItem("bookData")) || [];
   let index = prevBooks.findIndex((item) => item.id == bookId);
@@ -222,6 +223,8 @@ function decrement() {
   let rateInput = document.querySelector("#rate");
   if (parseInt(rateInput.value) > 0)
     rateInput.value = parseInt(rateInput.value) - 1;
+
+  // Update rate field in the current book
   let bookId = rateInput.dataset.bookId;
   let prevBooks = JSON.parse(localStorage.getItem("bookData")) || [];
   let index = prevBooks.findIndex((item) => item.id == bookId);
@@ -239,6 +242,7 @@ function decrement() {
 }
 
 function sortByTitle() {
+  // Filter only books array - without saving sort in the localStorage
   books.sort((a, b) => {
     const titleA = a.title.toLowerCase();
     const titleB = b.title.toLowerCase();
@@ -256,6 +260,7 @@ function sortByTitle() {
 }
 
 function sortByPrice() {
+  // Filter only books array - without saving sort in the localStorage
   books.sort((a, b) => a.price - b.price);
 
   displayBookData();
@@ -267,4 +272,7 @@ function loadData() {
   displayBookData();
 }
 
-window.onload = displayBookData;
+window.onload = function () {
+  displayBookData();
+  addEventListeners();
+};
