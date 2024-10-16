@@ -1,34 +1,39 @@
 {
-    "books": [
-        {
-            "id": 0,
-            "title": "The Hobbit",
-            "price": 34.00,
-            "image": "../assets/the_hobbit.jpg"
-        },
-        {
-            "id": 1,
-            "title": "The Hitchhikers Guide to the Galaxy",
-            "price": 13.95,
-            "image": "../assets/the_hitchhikers_guide_to_the_galaxy.jpg"
-        },
-        {
-            "id": 2,
-            "title": "The Lord Of The Rings",
-            "price": 32.55,
-            "image": "../assets/the_lord_of_the_rings.jpg"
-        },
-        {
-            "id": 3,
-            "title": "The Catcher in the Rye",
-            "price": 4.55,
-            "image": "../assets/the_catcher_in_the_rye.jpg"
-        },
-        {
-            "id": 4,
-            "title": "Effective Modern C++",
-            "price": 34.00,
-            "image": "../assets/effective_modern_C++.jpg"
-        }
-    ]
+  "books": [
+    {
+      "id": 0,
+      "title": "The Hobbit",
+      "price": 34.0,
+      "image": "../assets/images/the_hobbit.jpg",
+      "rate": 0
+    },
+    {
+      "id": 1,
+      "title": "The Hitchhikers Guide to the Galaxy",
+      "price": 13.95,
+      "image": "../assets/images/the_hitchhikers_guide_to_the_galaxy.jpg",
+      "rate": 0
+    },
+    {
+      "id": 2,
+      "title": "The Lord Of The Rings",
+      "price": 32.55,
+      "image": "../assets/images/the_lord_of_the_rings.jpg",
+      "rate": 0
+    },
+    {
+      "id": 3,
+      "title": "The Catcher in the Rye",
+      "price": 4.55,
+      "image": "../assets/images/the_catcher_in_the_rye.jpg",
+      "rate": 0
+    },
+    {
+      "id": 4,
+      "title": "Effective Modern C++",
+      "price": 34.0,
+      "image": "../assets/images/effective_modern_C++.jpg",
+      "rate": 0
+    }
+  ]
 }

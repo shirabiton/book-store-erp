@@ -1,47 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/icons/favicon.svg" type="icon/svg+xml" />
     <title>Book Store ERP</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/@iconify/iconify@latest/dist/iconify.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <script type="module" src="../js/index.js"></script>
 
     <h1>Bookshop ERP</h1>
 
     <header>
-        <p>+ New Book</p>
-        <div id="load-lang">
-            <p>Load Data</p>
-            <p>English</p>
-        </div>
+      <p id="add-book-btn">+ New Book</p>
+      <div id="load-lang">
+        <p id="load-data">Load Data</p>
+        <select name="lang" id="lang">
+          <option value="english">English</option>
+          <option value="hebrew">Hebrew</option>
+          <option value="arabic">Arabic</option>
+          <option value="french">French</option>
+          <option value="russian">Russian</option>
+        </select>
+      </div>
     </header>
 
-    <div id="table-container">
+    <div id="books-container">
+      <div id="table-container">
         <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title
-                        <span title="filter by title"><i class="iconify" data-icon="fe:drop-up"></i></span>
-                    </th>
-                    <th>Price
-                        <span title="sort by price"><i class="iconify" data-icon="fe:drop-up"></i></span>
-                    </th>
-                    <th colspan="3">Action</th>
-                </tr>
-            </thead>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>
+                Title
+                <span title="filter by title" id="title-th"
+                  ><i class="iconify" data-icon="fe:drop-up"></i
+                ></span>
+              </th>
+              <th>
+                Price
+                <span title="sort by price" id="price-th"
+                  ><i class="iconify" data-icon="fe:drop-up"></i
+                ></span>
+              </th>
+              <th colspan="3">Action</th>
+            </tr>
+          </thead>
 
-            <tbody>
-                <!-- will be filled in book data on page loading by displayBookData() function -->
-            </tbody>
+          <tbody>
+            <!-- will be filled in book data on page loading by displayBookData() function -->
+          </tbody>
         </table>
-    </div>
-</body>
+      </div>
 
+      <div id="book-details">
+        <div id="inner-book-details">
+          <div id="book-title-container">
+            <p></p>
+          </div>
+
+          <span id="more-book-details">
+            <img />
+
+            <div id="price-rate">
+              <p id="book-price"></p>
+
+              <label for="rate"
+                >Rate:
+                <button id="dec">-</button>
+                <input
+                  id="rate"
+                  type="number"
+                  min="0"
+                  max="5"
+                  step="1"
+                  data-book-id="1"
+                />
+                <button id="inc">+</button>
+              </label>
+            </div>
+          </span>
+        </div>
+
+        <p id="select-book">Select a book to view its details here</p>
+      </div>
+    </div>
+
+    <!-- add book -->
+    <div id="add-overlay" class="overlay">
+      <div id="new-book-form-title" class="form-title">
+        <p>+ New Book</p>
+        <p>--------------</p>
+      </div>
+
+      <form id="add-book-form">
+        <label for="add-book-id"
+          >Id
+          <input id="add-book-id" type="text" />
+        </label>
+        <label for="add-book-title"
+          >Title
+          <input id="add-book-title" type="text" />
+        </label>
+        <label for="add-book-price"
+          >Price
+          <input id="add-book-price" type="number" step="0.01" />
+        </label>
+        <label for="add-book-image"
+          >Cover Image URL
+          <input id="add-book-image" type="text" />
+        </label>
+        <div class="form-buttons-container">
+          <input type="submit" value="Add" class="form-btn" />
+          <button class="form-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- update book -->
+    <div id="update-overlay" class="overlay">
+      <div id="update-book-form-title" class="form-title">
+        <p>Update Book</p>
+        <p>--------------</p>
+      </div>
+
+      <form id="update-book-form">
+        <label for="update-book-id"
+          >Id
+          <input id="update-book-id" type="text" />
+        </label>
+        <label for="update-book-title"
+          >Title
+          <input id="update-book-title" type="text" />
+        </label>
+        <label for="update-book-price"
+          >Price
+          <input id="update-book-price" type="number" step="0.01" />
+        </label>
+        <label for="update-book-image"
+          >Cover Image URL
+          <input id="update-book-image" type="text" />
+        </label>
+        <div class="form-buttons-container">
+          <input type="submit" value="Update" class="form-btn" />
+          <button class="form-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
