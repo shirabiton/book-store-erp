@@ -1,18 +1,18 @@
-// These lines must be executed during the first run to store the data into localStorage.
+import bookData from '/../data/books.json' with {type: 'json'};
+
+// These line must be executed during the first run to store the data into localStorage.
 // Make sure to run the project using a local server (e.g., Live Server) to avoid CORS issues.
 
-// import bookData from '/../data/books.json' with {type: 'json'};
 // localStorage.setItem("bookData", JSON.stringify(bookData.books));
 
-let originalBooks = JSON.parse(localStorage.getItem("bookData"));
-let books = [...originalBooks];
-let isUpdateBookEvent = false;
-
-// Some HTML elements
-let addBookOverlay = document.querySelector("#add-overlay");
-let updateBookOverlay = document.querySelector("#update-overlay");
-let addBookForm = document.querySelector("#add-book-form");
-let updateBookForm = document.querySelector("#update-book-form");
+let originalBooks = JSON.parse(localStorage.getItem("bookData")),
+books = [...originalBooks],
+isUpdateBookEvent = false,
+  // Some HTML elements
+  addBookOverlay = document.querySelector("#add-overlay"),
+  updateBookOverlay = document.querySelector("#update-overlay"),
+  addBookForm = document.querySelector("#add-book-form"),
+  updateBookForm = document.querySelector("#update-book-form");
 
 function displayBookData() {
   let row, cell, readBtn, updateBtn, deleteIcn;
@@ -76,10 +76,7 @@ function addEventListeners() {
   document
     .querySelector("#add-book-btn")
     .addEventListener("click", openAddBookOverlay);
-  addBookForm.addEventListener("submit", (event) => {
-    // event.preventDefault();
-    addBook();
-  });
+  addBookForm.addEventListener("submit",addBook);
   addBookForm.querySelector("button").addEventListener("click", (event) => {
     event.preventDefault();
     addBookOverlay.style.display = "none";
@@ -139,8 +136,7 @@ function openUpdateBookOverlay(book) {
 
   // If an event listener for the book update form has not been added yet-add an event listener to handle the form submission
   if (!isUpdateBookEvent) {
-    updateBookForm.addEventListener("submit", (event) => {
-      // event.preventDefault();
+    updateBookForm.addEventListener("submit", () => {
       updateBook(book);
       isUpdateBookEvent = true;
     });
@@ -194,7 +190,7 @@ function deleteBook(book) {
   let prevBooks = JSON.parse(localStorage.getItem("bookData"));
   let newBooks = prevBooks.filter((item) => item.id !== book.id);
   localStorage.setItem("bookData", JSON.stringify(newBooks));
-  loadData();
+  getData();
 }
 
 function increment() {
@@ -216,7 +212,7 @@ function increment() {
     rate: parseInt(rateInput.value),
   };
   localStorage.setItem("bookData", JSON.stringify(prevBooks));
-  loadData();
+  getData();
 }
 
 function decrement() {
@@ -238,7 +234,7 @@ function decrement() {
     rate: parseInt(rateInput.value),
   };
   localStorage.setItem("bookData", JSON.stringify(prevBooks));
-  loadData();
+  getData();
 }
 
 function sortByTitle() {
@@ -266,10 +262,17 @@ function sortByPrice() {
   displayBookData();
 }
 
-function loadData() {
+// Get data from Json file
+function getData(){
   originalBooks = JSON.parse(localStorage.getItem("bookData"));
   books = [...originalBooks];
   displayBookData();
+}
+
+// Reset data from Json file
+function loadData() {
+  localStorage.setItem("bookData", JSON.stringify(bookData.books));
+  getData();
 }
 
 window.onload = function () {
